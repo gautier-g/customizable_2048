@@ -1,6 +1,7 @@
 package me.gap.pcd2048;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Game {
     private int[][] tiles;
@@ -16,10 +17,10 @@ public class Game {
         parties_number = 0;
         wins_number = 0;
 
-        nouveau(tilesNb, 2048);
+        create(tilesNb, 2048);
     }
 
-    void nouveau(int tilesNb, int goal) {
+    void create(int tilesNb, int goal) {
         this.tiles = new int[tilesNb][tilesNb];
         this.size = tilesNb;
         this.goal = goal;
@@ -33,37 +34,40 @@ public class Game {
         parties_number++;
     }
 
-    void addObserver(Observer observer) {
+    public void addObserver(Observer observer) {
         this.observers.add(observer);
     }
 
-    void notifyObservers() {
+    public void notifyObservers() {
         for (Observer observer : this.observers) {
             observer.notify();
         }
     }
 
-    String addRandomNumber() {
+    public String addRandomNumber() {
         ArrayList<int[]> clear_indices = new ArrayList<>();
         for (int i = 0; i < this.size; i++) {
             for (int j = 0; j < this.size; j++) {
-                clear_indices.add(new int[]{i, j});
+                if (this.tiles[i][j] == 0) {
+                    clear_indices.add(new int[]{i, j});
+                }
             }
         }
         int clear_size = clear_indices.size();
 
         if (clear_size == 0) {
-            return String.valueOf("lost");
+            return "lost";
         }
 
-        int[] random_coos = clear_indices.get((int) (Math.random() * clear_size));
+        Random rand = new Random();
+        int[] random_coos = clear_indices.get((int) rand.nextInt(clear_size));
 
         int[] spawn_values = new int[]{2, 4, 8};
-        int random_spawn_value = spawn_values[(int) (Math.random() * 3)];
+        int random_spawn_value = spawn_values[(int) rand.nextInt(3)];
 
         this.tiles[random_coos[0]][random_coos[1]] = random_spawn_value;
 
-        return String.valueOf("running");
+        return "running";
     }
 
     int align_items(String direction, int indice) {
@@ -77,9 +81,6 @@ public class Game {
                 for (int j = 0; j < this.size; j++) {
                     current_value = this.tiles[indice][j];
                     if (current_value != 0) {
-                        if (current_value > max) {
-                            max = current_value;
-                        }
                         if (current_value == previous_value) {
                             occupied_indices.set(occupied_indices.size() - 1, previous_value*2);
                             previous_value = -1;
@@ -92,19 +93,21 @@ public class Game {
                     }
                 }
 
+                for (int i = 0; i < occupied_indices.size(); i++) {
+                    if (occupied_indices.get(i) > max) {
+                        max = occupied_indices.get(i);
+                    }
+                }
+
                 int k = 0;
-                for (Integer occupiedIndex : occupied_indices) {
-                    this.tiles[indice][k] = occupiedIndex;
-                    k++;
+                for (int occupiedIndex = 0; occupiedIndex<occupied_indices.size(); occupiedIndex++) {
+                    this.tiles[indice][occupiedIndex] = occupied_indices.get(occupiedIndex);
                 }
             }
             case "right" -> {
-                for (int j = this.size - 1; j > 0; j--) {
+                for (int j = this.size - 1; j >= 0; j--) {
                     current_value = this.tiles[indice][j];
                     if (current_value != 0) {
-                        if (current_value > max) {
-                            max = current_value;
-                        }
                         if (current_value == previous_value) {
                             occupied_indices.set(occupied_indices.size() - 1, previous_value*2);
                             previous_value = -1;
@@ -117,19 +120,20 @@ public class Game {
                     }
                 }
 
-                int k = 0;
-                for (Integer occupiedIndex : occupied_indices) {
-                    this.tiles[indice][this.size - 1 - k] = occupiedIndex;
-                    k++;
+                for (int i = 0; i < occupied_indices.size(); i++) {
+                    if (occupied_indices.get(i) > max) {
+                        max = occupied_indices.get(i);
+                    }
+                }
+
+                for (int occupiedIndex = 0; occupiedIndex<occupied_indices.size(); occupiedIndex++) {
+                    this.tiles[indice][this.size - 1 - occupiedIndex] = occupied_indices.get(occupiedIndex);
                 }
             }
             case "up" -> {
                 for (int i = 0; i < this.size; i++) {
                     current_value = this.tiles[i][indice];
                     if (current_value != 0) {
-                        if (current_value > max) {
-                            max = current_value;
-                        }
                         if (current_value == previous_value) {
                             occupied_indices.set(occupied_indices.size() - 1, previous_value*2);
                             previous_value = -1;
@@ -142,19 +146,20 @@ public class Game {
                     }
                 }
 
-                int k = 0;
-                for (Integer occupiedIndex : occupied_indices) {
-                    this.tiles[k][indice] = occupiedIndex;
-                    k++;
+                for (int i = 0; i < occupied_indices.size(); i++) {
+                    if (occupied_indices.get(i) > max) {
+                        max = occupied_indices.get(i);
+                    }
+                }
+
+                for (int occupiedIndex = 0; occupiedIndex<occupied_indices.size(); occupiedIndex++) {
+                    this.tiles[occupiedIndex][indice] = occupied_indices.get(occupiedIndex);
                 }
             }
             case "down" -> {
-                for (int i = this.size - 1; i > 0; i--) {
+                for (int i = this.size - 1; i >= 0; i--) {
                     current_value = this.tiles[i][indice];
                     if (current_value != 0) {
-                        if (current_value > max) {
-                            max = current_value;
-                        }
                         if (current_value == previous_value) {
                             occupied_indices.set(occupied_indices.size() - 1, previous_value*2);
                             previous_value = -1;
@@ -167,10 +172,14 @@ public class Game {
                     }
                 }
 
-                int k = 0;
-                for (Integer occupiedIndex : occupied_indices) {
-                    this.tiles[this.size - 1 - k][indice] = occupiedIndex;
-                    k++;
+                for (int i = 0; i < occupied_indices.size(); i++) {
+                    if (occupied_indices.get(i) > max) {
+                        max = occupied_indices.get(i);
+                    }
+                }
+
+                for (int occupiedIndex = 0; occupiedIndex<occupied_indices.size(); occupiedIndex++) {
+                    this.tiles[this.size - 1 - occupiedIndex][indice] = occupied_indices.get(occupiedIndex);
                 }
             }
         }
@@ -191,9 +200,9 @@ public class Game {
     void play(String direction) {
         int max = swipe_grid(direction);
         this.current_game_state = addRandomNumber();
-        if (this.current_game_state.equals(String.valueOf("lost")) && max >= this.goal) {
+        if (this.current_game_state == "running" && max >= this.goal) {
             wins_number += 1;
-            this.current_game_state = String.valueOf("won");
+            this.current_game_state = "won";
         }
     }
 
@@ -205,13 +214,41 @@ public class Game {
         return tiles[i][j];
     }
 
+    int getGoal() {
+        return this.goal;
+    }
+
+    int getPartiesNumber() {
+        return parties_number;
+    }
+
+    int getWinsNumber() {
+        return wins_number;
+    }
+
+    String getGameState() {
+        return this.current_game_state;
+    }
+
+    ArrayList<Observer> getObservers() {
+        return this.observers;
+    }
+
     void setSize(int tilesNb) {
         this.size = tilesNb;
-        nouveau(tilesNb, this.goal);
+        create(tilesNb, this.goal);
     }
 
     void setGoal(int goalNb) {
         this.goal = goalNb;
-        nouveau(this.size, goalNb);
+        create(this.size, goalNb);
+    }
+
+    void setTiles(int[][] tiles) {
+        for (int i = 0; i<tiles.length; i++) {
+            for (int j = 0; j<tiles.length; j++) {
+                this.tiles[i][j] = tiles[i][j];
+            }
+        }
     }
 }

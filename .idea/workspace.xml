@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="c33b7632-a8fc-43f8-90df-b88ffc516437" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/Game.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +54,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -78,6 +80,8 @@
   "keyToString": {
     "Gradle.tp1_pcd [run].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/home/gapial/IdeaProjects/tp1_pcd/settings.gradle",
@@ -91,11 +95,18 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.keymap",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="me.gap.pcd2048" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
       <recent name="me.gap.pcd2048" />
     </key>
   </component>
@@ -156,7 +167,7 @@
       <workItem from="1730112213517" duration="87000" />
       <workItem from="1730112315605" duration="133000" />
       <workItem from="1730112484598" duration="68000" />
-      <workItem from="1730112573831" duration="21498000" />
+      <workItem from="1730112573831" duration="34999000" />
     </task>
     <servers />
   </component>
