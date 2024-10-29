@@ -32,6 +32,7 @@ public class Game {
         }
         this.current_game_state = "running";
         parties_number++;
+        notifyObservers();
     }
 
     public void addObserver(Observer observer) {
@@ -204,6 +205,7 @@ public class Game {
             wins_number += 1;
             this.current_game_state = "won";
         }
+        notifyObservers();
     }
 
     int getSize() {
@@ -244,7 +246,7 @@ public class Game {
         create(this.size, goalNb);
     }
 
-    void setTiles(int[][] tiles) {
+    void setTiles(int[][] tiles) { // used for testing
         for (int i = 0; i<tiles.length; i++) {
             for (int j = 0; j<tiles.length; j++) {
                 this.tiles[i][j] = tiles[i][j];

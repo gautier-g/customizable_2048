@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="c33b7632-a8fc-43f8-90df-b88ffc516437" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/Observer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/Observer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,8 +53,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -167,7 +167,7 @@
       <workItem from="1730112213517" duration="87000" />
       <workItem from="1730112315605" duration="133000" />
       <workItem from="1730112484598" duration="68000" />
-      <workItem from="1730112573831" duration="34999000" />
+      <workItem from="1730112573831" duration="37323000" />
     </task>
     <servers />
   </component>
