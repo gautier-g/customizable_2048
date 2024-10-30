@@ -1,5 +1,6 @@
 package me.gap.pcd2048;
 
+import javafx.scene.layout.BorderPane;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -42,8 +43,15 @@ class GameTest {
 
     @Test
     void addObserver() {
-        game.addObserver(new Observer() {});
+        VueStats vue_stats = new VueStats(game);
+        game.addObserver(vue_stats);
         assertEquals(1, game.getObservers().size());
+        VueMenu vue_menu = new VueMenu(game);
+        game.addObserver(vue_menu);
+        assertEquals(2, game.getObservers().size());
+        VuePlateau vue_plateau = new VuePlateau(game);
+        game.addObserver(vue_plateau);
+        assertEquals(3, game.getObservers().size());
     }
 
     @Test

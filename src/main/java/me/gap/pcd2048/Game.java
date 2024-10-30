@@ -30,6 +30,8 @@ public class Game {
                 this.tiles[i][j] = 0;
             }
         }
+        addRandomNumber();
+        addRandomNumber();
         this.current_game_state = "running";
         parties_number++;
         notifyObservers();
@@ -41,7 +43,7 @@ public class Game {
 
     public void notifyObservers() {
         for (Observer observer : this.observers) {
-            observer.notify();
+            observer.react();
         }
     }
 
