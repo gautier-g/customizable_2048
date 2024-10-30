@@ -12,10 +12,11 @@ public class Main extends Application {
     @Override
     public void start (Stage primaryStage) {
         primaryStage.setTitle("PCD 2048");
-
-        Game game = new Game(8);
-
         BorderPane root = new BorderPane();
+        Scene scene = new Scene(root, 900, 900);
+
+        Game game = new Game(8, scene);
+
 
         VBox leftRegion = new VBox();
         root.setLeft(leftRegion);
@@ -39,7 +40,6 @@ public class Main extends Application {
         root.setBottom(vs);
         root.setStyle("-fx-background-color: #040E2F;");
 
-        Scene scene = new Scene(root, 900, 900);
         scene.setOnKeyPressed(new PlayListener(game));
         primaryStage.setScene(scene);
         primaryStage.show();

@@ -1,12 +1,15 @@
 package me.gap.pcd2048;
 
+import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameTest {
-    private final Game game = new Game(4);
+    BorderPane pane = new BorderPane();
+    private final Game game = new Game(4, new Scene(pane));
     private final int[][] testGrid1 = {
         {0, 32, 16, 0},
         {8, 0, 16, 0},

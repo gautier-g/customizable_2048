@@ -1,19 +1,31 @@
 package me.gap.pcd2048;
 
+import javafx.animation.PauseTransition;
+import javafx.scene.Scene;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.stage.Popup;
+import javafx.scene.control.Label;
+import javafx.util.Duration;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class Game {
+    private Scene scene;
     private int[][] tiles;
     private int goal;
     private int size;
     private ArrayList<Observer> observers;
     private String current_game_state;
+    private String previous_game_state;
     private static int parties_number;
     private static int wins_number;
 
-    public Game(int tilesNb) {
+    public Game(int tilesNb, Scene scene) {
         this.observers = new ArrayList<>();
+        this.scene = scene;
         parties_number = 0;
         wins_number = 0;
 
@@ -30,9 +42,10 @@ public class Game {
                 this.tiles[i][j] = 0;
             }
         }
-        addRandomNumber();
-        addRandomNumber();
+        this.previous_game_state = "running";
         this.current_game_state = "running";
+        addRandomNumber();
+        addRandomNumber();
         parties_number++;
         notifyObservers();
     }
@@ -47,6 +60,40 @@ public class Game {
         }
     }
 
+    public boolean oneTileFree() {
+        for (int i = 0; i < this.size; i++) {
+            for (int j = 0; j < this.size; j++) {
+                if (this.tiles[i][j] == 0) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean checkIsLost() {
+        int[][] tiles_copy = new int[this.size][this.size];
+        for (int i = 0; i < this.size; i++) {
+            for (int j = 0; j < this.size; j++) {
+                tiles_copy[i][j] = this.tiles[i][j];
+            }
+        }
+        swipe_grid("up");
+        boolean lost_up = !oneTileFree();
+        this.setTiles(tiles_copy);
+        swipe_grid("down");
+        boolean lost_down = !oneTileFree();
+        this.setTiles(tiles_copy);
+        swipe_grid("right");
+        boolean lost_right = !oneTileFree();
+        this.setTiles(tiles_copy);
+        swipe_grid("left");
+        boolean lost_left = !oneTileFree();
+        this.setTiles(tiles_copy);
+
+        return lost_up && lost_down && lost_right && lost_left;
+    }
+
     public String addRandomNumber() {
         ArrayList<int[]> clear_indices = new ArrayList<>();
         for (int i = 0; i < this.size; i++) {
@@ -59,7 +106,12 @@ public class Game {
         int clear_size = clear_indices.size();
 
         if (clear_size == 0) {
-            return "lost";
+            if (this.current_game_state.equals("won")) {
+                return "won";
+            }
+            else {
+                return "running";
+            }
         }
 
         Random rand = new Random();
@@ -70,7 +122,16 @@ public class Game {
 
         this.tiles[random_coos[0]][random_coos[1]] = random_spawn_value;
 
-        return "running";
+        if (checkIsLost()) {
+            return "lost";
+        }
+
+        if (this.current_game_state.equals("won")) {
+            return "won";
+        }
+        else {
+            return "running";
+        }
     }
 
     int align_items(String direction, int indice) {
@@ -203,11 +264,40 @@ public class Game {
     void play(String direction) {
         int max = swipe_grid(direction);
         this.current_game_state = addRandomNumber();
+        System.out.println(this.current_game_state);
         if (this.current_game_state == "running" && max >= this.goal) {
             wins_number += 1;
             this.current_game_state = "won";
         }
         notifyObservers();
+        display_state();
+    }
+
+    void display_state() {
+        Popup popup = new Popup();
+        popup.setAutoHide(true);
+
+        if (this.current_game_state == "won" && this.previous_game_state == "running") {
+            Label label = new Label("You won!");
+            label.setFont(Font.font("Arial", 25));
+            label.setTextFill(Color.WHITE);
+            label.setStyle("-fx-background-color: black; -fx-padding: 10px;");
+            popup.getContent().add(label);
+            popup.show(this.scene.getWindow());
+        }
+        else if (this.current_game_state == "lost" && this.previous_game_state == "running") {
+            Label label = new Label("You lost!");
+            label.setFont(Font.font("Arial", 25));
+            label.setTextFill(Color.WHITE);
+            label.setStyle("-fx-background-color: black; -fx-padding: 10px;");
+            popup.getContent().add(label);
+            popup.show(this.scene.getWindow());
+        }
+        this.previous_game_state = current_game_state;
+
+        PauseTransition pause = new PauseTransition(Duration.seconds(2));
+        pause.setOnFinished(event -> popup.hide());
+        pause.play();
     }
 
     int getSize() {
