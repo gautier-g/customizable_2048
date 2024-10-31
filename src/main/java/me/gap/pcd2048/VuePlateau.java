@@ -22,6 +22,12 @@ public class VuePlateau extends GridPane implements Observer {
         this.setPadding(new Insets(20, 20, 20, 20));
         this.setHgap(5);
         this.setVgap(5);
+        this.setPrefWidth(700);
+        this.setPrefHeight(700);
+        this.setMinHeight(700);
+        this.setMaxHeight(700);
+        this.setMinWidth(700);
+        this.setMaxWidth(700);
         this.game = game;
         for (int i = 0; i < this.game.getSize(); i++) {
             ColumnConstraints column = new ColumnConstraints();

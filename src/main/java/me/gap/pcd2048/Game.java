@@ -109,6 +109,9 @@ public class Game {
             if (this.current_game_state.equals("won")) {
                 return "won";
             }
+            else if (this.current_game_state.equals("lost")) {
+                return "lost";
+            }
             else {
                 return "running";
             }
