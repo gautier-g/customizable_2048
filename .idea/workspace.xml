@@ -10,11 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c33b7632-a8fc-43f8-90df-b88ffc516437" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/VueStats.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/VueStats.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,6 +81,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
     "Gradle.tp1_pcd [run].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
@@ -176,7 +173,7 @@
       <workItem from="1730112315605" duration="133000" />
       <workItem from="1730112484598" duration="68000" />
       <workItem from="1730112573831" duration="75294000" />
-      <workItem from="1730379749133" duration="7616000" />
+      <workItem from="1730379749133" duration="7910000" />
     </task>
     <servers />
   </component>
