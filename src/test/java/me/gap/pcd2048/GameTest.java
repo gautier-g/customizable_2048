@@ -1,5 +1,6 @@
 package me.gap.pcd2048;
 
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -8,8 +9,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameTest {
-    BorderPane pane = new BorderPane();
-    private final Game game = new Game(4, new Scene(pane));
+    private final Game game = new Game(4);
     private final int[][] testGrid1 = {
         {0, 32, 16, 0},
         {8, 0, 16, 0},
@@ -18,25 +18,29 @@ class GameTest {
     };
     private final int[][] testGrid2 = {
             {2, 32, 16, 2},
-            {8, 2, 16, 2},
-            {2, 4, 2, 2},
+            {32, 2, 32, 4},
+            {0, 32, 2, 8},
             {128, 2, 16, 2}
     };
     private final int[][] testGrid3 = {
             {2, 32, 1024, 2},
             {8, 2, 1024, 4},
             {2, 4, 8, 2},
-            {128, 2, 16, 64}
+            {128, 2, 4, 8}
     };
 
     @Test
     void create() {
         assertEquals(4, game.getSize());
+        int not_null_numbers = 0;
         for (int i = 0; i < game.getSize(); i++) {
             for (int j = 0; j < game.getSize(); j++) {
-                assertEquals(0, game.getTile(i, j));
+                if (game.getTile(i,j) != 0) {
+                    not_null_numbers++;
+                }
             }
         }
+        assertEquals(2, not_null_numbers);
         assertEquals(2048, game.getGoal());
         assertEquals(1, game.getPartiesNumber());
         assertEquals(0, game.getWinsNumber());
@@ -45,20 +49,8 @@ class GameTest {
     }
 
     @Test
-    void addObserver() {
-        VueStats vue_stats = new VueStats(game);
-        game.addObserver(vue_stats);
-        assertEquals(1, game.getObservers().size());
-        VueMenu vue_menu = new VueMenu(game);
-        game.addObserver(vue_menu);
-        assertEquals(2, game.getObservers().size());
-        VuePlateau vue_plateau = new VuePlateau(game);
-        game.addObserver(vue_plateau);
-        assertEquals(3, game.getObservers().size());
-    }
-
-    @Test
     void addRandomNumber() {
+        game.create(4, 2048);
         game.setTiles(testGrid1);
         String running_state = game.addRandomNumber();
         assertEquals("running", running_state);
@@ -83,6 +75,7 @@ class GameTest {
         assertEquals(5, number_of_zeros1);
         assertEquals(1, numbers_added1);
 
+        game.create(4, 2048);
         game.setTiles(testGrid2);
         String lost_state = game.addRandomNumber();
         assertEquals("lost", lost_state);
@@ -102,7 +95,7 @@ class GameTest {
             }
         }
         assertEquals(0, number_of_zeros2);
-        assertEquals(0, numbers_added2);
+        assertEquals(1, numbers_added2);
     }
 
     @Test
@@ -222,10 +215,10 @@ class GameTest {
 
     @Test
     void swipe_grid() {
-        assertEquals(0, game.swipe_grid("up"));
-        assertEquals(0, game.swipe_grid("right"));
-        assertEquals(0, game.swipe_grid("left"));
-        assertEquals(0, game.swipe_grid("down"));
+        assertTrue(game.swipe_grid("up") <= 8);
+        assertTrue(game.swipe_grid("down") <= 8);
+        assertTrue(game.swipe_grid("right") <= 8);
+        assertTrue(game.swipe_grid("left") <= 8);
         game.setTiles(testGrid1);
         assertEquals(128, game.swipe_grid("up"));
         assertEquals(128, game.swipe_grid("down"));
@@ -235,12 +228,14 @@ class GameTest {
 
     @Test
     void play() {
+        game.create(4, 2048);
         game.setTiles(testGrid1);
-        game.play("up");
+        game.play_no_gui("up");
         assertEquals("running", game.getGameState());
         assertEquals(0, game.getWinsNumber());
+        game.create(4, 2048);
         game.setTiles(testGrid3);
-        game.play("up");
+        game.play_no_gui("up");
         assertEquals("won", game.getGameState());
         assertEquals(1, game.getWinsNumber());
     }

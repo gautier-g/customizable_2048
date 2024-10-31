@@ -5,14 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c33b7632-a8fc-43f8-90df-b88ffc516437" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/SizeListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/SizeListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/SwitchGoalListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/GoalListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/VueMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/VueMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/VuePlateau.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/VuePlateau.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/me/gap/pcd2048/GameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/me/gap/pcd2048/GameTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,7 +168,7 @@
       <workItem from="1730112315605" duration="133000" />
       <workItem from="1730112484598" duration="68000" />
       <workItem from="1730112573831" duration="75294000" />
-      <workItem from="1730379749133" duration="1523000" />
+      <workItem from="1730379749133" duration="3985000" />
     </task>
     <servers />
   </component>

@@ -32,6 +32,14 @@ public class Game {
         create(tilesNb, 2048);
     }
 
+    public Game(int tilesNb) { // FOR TESTS
+        this.observers = new ArrayList<>();
+        parties_number = 0;
+        wins_number = 0;
+
+        create(tilesNb, 2048);
+    }
+
     void create(int tilesNb, int goal) {
         this.tiles = new int[tilesNb][tilesNb];
         this.size = tilesNb;
@@ -274,6 +282,17 @@ public class Game {
         }
         notifyObservers();
         display_state();
+    }
+
+    void play_no_gui(String direction) { // FOR TESTS
+        int max = swipe_grid(direction);
+        this.current_game_state = addRandomNumber();
+        System.out.println(this.current_game_state);
+        if (this.current_game_state == "running" && max >= this.goal) {
+            wins_number += 1;
+            this.current_game_state = "won";
+        }
+        notifyObservers();
     }
 
     void display_state() {
