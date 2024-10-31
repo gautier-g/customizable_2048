@@ -36,6 +36,6 @@ public class VueStats extends HBox implements Observer {
     }
 
     public void react() {
-        this.label.setText("Parties gagnées / jouées: " + this.game.getWinsNumber() + " / " + this.game.getPartiesNumber());
+        this.label.setText("Games won/played: " + this.game.getWinsNumber() + " / " + this.game.getPartiesNumber());
     }
 }

@@ -1,2 +1,3 @@
 rootProject.name = 'tp1_pcd'
+include 'pcd_2048_georgeon'
 

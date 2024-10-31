@@ -15,7 +15,7 @@ public class Main extends Application {
         BorderPane root = new BorderPane();
         Scene scene = new Scene(root, 900, 900);
 
-        Game game = new Game(8, scene);
+        Game game = new Game(4, scene);
 
 
         VBox leftRegion = new VBox();
