@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="tp1_pcd:jar" />
+      <artifact name="jeu:jar" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
@@ -10,7 +10,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c33b7632-a8fc-43f8-90df-b88ffc516437" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/tp1_pcd_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tp1_pcd_jar/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/tp1_pcd_jar/tp1_pcd.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/ExitListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/EcouteurQuitter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/Jeu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/GoalListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/EcouteurObjectif.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/NewListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/EcouteurNouveau.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/Observer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/Observateur.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/PlayListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/EcouteurJouer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/SizeListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/EcouteurTaille.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/VueMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/VueMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/VuePlateau.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/VuePlateau.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/VueStats.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/gap/pcd2048/VueStats.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/me/gap/pcd2048/GameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/me/gap/pcd2048/JeuTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,6 +98,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
+    "Gradle.Build tp1_pcd.executor": "Run",
     "Gradle.tp1_pcd [run].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
@@ -174,6 +191,9 @@
       <workItem from="1730112484598" duration="68000" />
       <workItem from="1730112573831" duration="75294000" />
       <workItem from="1730379749133" duration="7910000" />
+      <workItem from="1730412741606" duration="1072000" />
+      <workItem from="1730479015630" duration="352000" />
+      <workItem from="1730716968445" duration="6067000" />
     </task>
     <servers />
   </component>

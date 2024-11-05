@@ -3,7 +3,6 @@ package me.gap.pcd2048;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -11,11 +10,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 
-public class VuePlateau extends GridPane implements Observer {
+public class VuePlateau extends GridPane implements Observateur {
     private Label[][] tiles;
-    private Game game;
+    private Jeu jeu;
 
-    public VuePlateau(Game game) {
+    public VuePlateau(Jeu jeu) {
         super();
         this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(8), BorderWidths.DEFAULT)));
         this.setStyle("-fx-background-color: #42858C; -fx-background-radius: 8px;");
@@ -28,8 +27,8 @@ public class VuePlateau extends GridPane implements Observer {
         this.setMaxHeight(700);
         this.setMinWidth(700);
         this.setMaxWidth(700);
-        this.game = game;
-        for (int i = 0; i < this.game.getSize(); i++) {
+        this.jeu = jeu;
+        for (int i = 0; i < this.jeu.size(); i++) {
             ColumnConstraints column = new ColumnConstraints();
             column.setHgrow(Priority.ALWAYS);
             this.getColumnConstraints().add(column);
@@ -38,24 +37,24 @@ public class VuePlateau extends GridPane implements Observer {
             row.setVgrow(Priority.ALWAYS);
             this.getRowConstraints().add(row);
         }
-        this.game.addObserver(this);
-        Platform.runLater(this::react);
+        this.jeu.ajouterObservateur(this);
+        Platform.runLater(this::reagir);
     }
 
-    public void react() {
+    public void reagir() {
         this.getChildren().clear();
-        int grid_width = this.game.getSize();
+        int grid_width = this.jeu.size();
         this.tiles = new Label[grid_width][grid_width];
         double tile_size = (double) ((700 - 40 - 10*(grid_width-1))/grid_width) + 5;
 
 
         for (int i = 0; i < grid_width; i++) {
             for (int j = 0; j < grid_width; j++) {
-                if (game.getTile(i,j) == 0) {
+                if (jeu.getCase(i,j) == 0) {
                     this.tiles[i][j] = new Label();
                 }
                 else {
-                    this.tiles[i][j] = new Label(String.valueOf(game.getTile(i,j)));
+                    this.tiles[i][j] = new Label(String.valueOf(jeu.getCase(i,j)));
                 }
                 this.tiles[i][j].setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, new CornerRadii(8), BorderWidths.DEFAULT)));
                 this.tiles[i][j].setStyle("-fx-background-color: #63CCCA; -fx-background-radius: 8px;");

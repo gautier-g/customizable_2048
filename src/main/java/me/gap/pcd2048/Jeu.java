@@ -9,45 +9,44 @@ import javafx.scene.control.Label;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
-public class Game {
+public class Jeu {
     private Scene scene;
-    private int[][] tiles;
-    private int goal;
+    private int[][] cases;
+    private int objectif;
     private int size;
-    private ArrayList<Observer> observers;
+    private ArrayList<Observateur> observateurs;
     private String current_game_state;
     private String previous_game_state;
     private static int parties_number;
     private static int wins_number;
 
-    public Game(int tilesNb, Scene scene) {
-        this.observers = new ArrayList<>();
+    public Jeu(int tilesNb, Scene scene) {
+        this.observateurs = new ArrayList<>();
         this.scene = scene;
         parties_number = 0;
         wins_number = 0;
 
-        create(tilesNb, 2048);
+        nouveau(tilesNb, 2048);
     }
 
-    public Game(int tilesNb) { // FOR TESTS
-        this.observers = new ArrayList<>();
+    public Jeu(int nbCases) { // FOR TESTS
+        this.observateurs = new ArrayList<>();
         parties_number = 0;
         wins_number = 0;
 
-        create(tilesNb, 2048);
+        nouveau(nbCases, 2048);
     }
 
-    void create(int tilesNb, int goal) {
-        this.tiles = new int[tilesNb][tilesNb];
+    void nouveau(int tilesNb, int goal) {
+        this.cases = new int[tilesNb][tilesNb];
         this.size = tilesNb;
-        this.goal = goal;
+        this.objectif = goal;
 
         for (int i = 0; i < this.size; i++) {
             for (int j = 0; j < this.size; j++) {
-                this.tiles[i][j] = 0;
+                this.cases[i][j] = 0;
             }
         }
         this.previous_game_state = "running";
@@ -55,23 +54,23 @@ public class Game {
         addRandomNumber();
         addRandomNumber();
         parties_number++;
-        notifyObservers();
+        notifierObservateurs();
     }
 
-    public void addObserver(Observer observer) {
-        this.observers.add(observer);
+    public void ajouterObservateur(Observateur obs) {
+        this.observateurs.add(obs);
     }
 
-    public void notifyObservers() {
-        for (Observer observer : this.observers) {
-            observer.react();
+    public void notifierObservateurs() {
+        for (Observateur observer : this.observateurs) {
+            observer.reagir();
         }
     }
 
     public boolean oneTileFree() {
         for (int i = 0; i < this.size; i++) {
             for (int j = 0; j < this.size; j++) {
-                if (this.tiles[i][j] == 0) {
+                if (this.cases[i][j] == 0) {
                     return true;
                 }
             }
@@ -83,21 +82,21 @@ public class Game {
         int[][] tiles_copy = new int[this.size][this.size];
         for (int i = 0; i < this.size; i++) {
             for (int j = 0; j < this.size; j++) {
-                tiles_copy[i][j] = this.tiles[i][j];
+                tiles_copy[i][j] = this.cases[i][j];
             }
         }
         swipe_grid("up");
         boolean lost_up = !oneTileFree();
-        this.setTiles(tiles_copy);
+        this.setCases(tiles_copy);
         swipe_grid("down");
         boolean lost_down = !oneTileFree();
-        this.setTiles(tiles_copy);
+        this.setCases(tiles_copy);
         swipe_grid("right");
         boolean lost_right = !oneTileFree();
-        this.setTiles(tiles_copy);
+        this.setCases(tiles_copy);
         swipe_grid("left");
         boolean lost_left = !oneTileFree();
-        this.setTiles(tiles_copy);
+        this.setCases(tiles_copy);
 
         return lost_up && lost_down && lost_right && lost_left;
     }
@@ -106,7 +105,7 @@ public class Game {
         ArrayList<int[]> clear_indices = new ArrayList<>();
         for (int i = 0; i < this.size; i++) {
             for (int j = 0; j < this.size; j++) {
-                if (this.tiles[i][j] == 0) {
+                if (this.cases[i][j] == 0) {
                     clear_indices.add(new int[]{i, j});
                 }
             }
@@ -131,7 +130,7 @@ public class Game {
         int[] spawn_values = new int[]{2, 4, 8};
         int random_spawn_value = spawn_values[(int) rand.nextInt(3)];
 
-        this.tiles[random_coos[0]][random_coos[1]] = random_spawn_value;
+        this.cases[random_coos[0]][random_coos[1]] = random_spawn_value;
 
         if (checkIsLost()) {
             return "lost";
@@ -154,7 +153,7 @@ public class Game {
         switch (direction) {
             case "left" -> {
                 for (int j = 0; j < this.size; j++) {
-                    current_value = this.tiles[indice][j];
+                    current_value = this.cases[indice][j];
                     if (current_value != 0) {
                         if (current_value == previous_value) {
                             occupied_indices.set(occupied_indices.size() - 1, previous_value*2);
@@ -164,7 +163,7 @@ public class Game {
                             occupied_indices.add(current_value);
                             previous_value = current_value;
                         }
-                        this.tiles[indice][j] = 0;
+                        this.cases[indice][j] = 0;
                     }
                 }
 
@@ -176,12 +175,12 @@ public class Game {
 
                 int k = 0;
                 for (int occupiedIndex = 0; occupiedIndex<occupied_indices.size(); occupiedIndex++) {
-                    this.tiles[indice][occupiedIndex] = occupied_indices.get(occupiedIndex);
+                    this.cases[indice][occupiedIndex] = occupied_indices.get(occupiedIndex);
                 }
             }
             case "right" -> {
                 for (int j = this.size - 1; j >= 0; j--) {
-                    current_value = this.tiles[indice][j];
+                    current_value = this.cases[indice][j];
                     if (current_value != 0) {
                         if (current_value == previous_value) {
                             occupied_indices.set(occupied_indices.size() - 1, previous_value*2);
@@ -191,7 +190,7 @@ public class Game {
                             occupied_indices.add(current_value);
                             previous_value = current_value;
                         }
-                        this.tiles[indice][j] = 0;
+                        this.cases[indice][j] = 0;
                     }
                 }
 
@@ -202,12 +201,12 @@ public class Game {
                 }
 
                 for (int occupiedIndex = 0; occupiedIndex<occupied_indices.size(); occupiedIndex++) {
-                    this.tiles[indice][this.size - 1 - occupiedIndex] = occupied_indices.get(occupiedIndex);
+                    this.cases[indice][this.size - 1 - occupiedIndex] = occupied_indices.get(occupiedIndex);
                 }
             }
             case "up" -> {
                 for (int i = 0; i < this.size; i++) {
-                    current_value = this.tiles[i][indice];
+                    current_value = this.cases[i][indice];
                     if (current_value != 0) {
                         if (current_value == previous_value) {
                             occupied_indices.set(occupied_indices.size() - 1, previous_value*2);
@@ -217,7 +216,7 @@ public class Game {
                             occupied_indices.add(current_value);
                             previous_value = current_value;
                         }
-                        this.tiles[i][indice] = 0;
+                        this.cases[i][indice] = 0;
                     }
                 }
 
@@ -228,12 +227,12 @@ public class Game {
                 }
 
                 for (int occupiedIndex = 0; occupiedIndex<occupied_indices.size(); occupiedIndex++) {
-                    this.tiles[occupiedIndex][indice] = occupied_indices.get(occupiedIndex);
+                    this.cases[occupiedIndex][indice] = occupied_indices.get(occupiedIndex);
                 }
             }
             case "down" -> {
                 for (int i = this.size - 1; i >= 0; i--) {
-                    current_value = this.tiles[i][indice];
+                    current_value = this.cases[i][indice];
                     if (current_value != 0) {
                         if (current_value == previous_value) {
                             occupied_indices.set(occupied_indices.size() - 1, previous_value*2);
@@ -243,7 +242,7 @@ public class Game {
                             occupied_indices.add(current_value);
                             previous_value = current_value;
                         }
-                        this.tiles[i][indice] = 0;
+                        this.cases[i][indice] = 0;
                     }
                 }
 
@@ -254,7 +253,7 @@ public class Game {
                 }
 
                 for (int occupiedIndex = 0; occupiedIndex<occupied_indices.size(); occupiedIndex++) {
-                    this.tiles[this.size - 1 - occupiedIndex][indice] = occupied_indices.get(occupiedIndex);
+                    this.cases[this.size - 1 - occupiedIndex][indice] = occupied_indices.get(occupiedIndex);
                 }
             }
         }
@@ -272,15 +271,15 @@ public class Game {
         return max;
     }
 
-    void play(String direction) {
+    void jouer(String direction) {
         int max = swipe_grid(direction);
         this.current_game_state = addRandomNumber();
         System.out.println(this.current_game_state);
-        if (this.current_game_state == "running" && max >= this.goal) {
+        if (this.current_game_state == "running" && max >= this.objectif) {
             wins_number += 1;
             this.current_game_state = "won";
         }
-        notifyObservers();
+        notifierObservateurs();
         display_state();
     }
 
@@ -288,11 +287,11 @@ public class Game {
         int max = swipe_grid(direction);
         this.current_game_state = addRandomNumber();
         System.out.println(this.current_game_state);
-        if (this.current_game_state == "running" && max >= this.goal) {
+        if (this.current_game_state == "running" && max >= this.objectif) {
             wins_number += 1;
             this.current_game_state = "won";
         }
-        notifyObservers();
+        notifierObservateurs();
     }
 
     void display_state() {
@@ -322,23 +321,23 @@ public class Game {
         pause.play();
     }
 
-    int getSize() {
+    int size() {
         return this.size;
     }
 
-    int getTile(int i, int j) {
-        return tiles[i][j];
+    int getCase(int lig, int col) {
+        return cases[lig][col];
     }
 
-    int getGoal() {
-        return this.goal;
+    int getObjectif() {
+        return this.objectif;
     }
 
-    int getPartiesNumber() {
+    int getNbJouees() {
         return parties_number;
     }
 
-    int getWinsNumber() {
+    int getNbGagnees() {
         return wins_number;
     }
 
@@ -346,24 +345,24 @@ public class Game {
         return this.current_game_state;
     }
 
-    ArrayList<Observer> getObservers() {
-        return this.observers;
+    ArrayList<Observateur> getObservateurs() {
+        return this.observateurs;
     }
 
-    void setSize(int tilesNb) {
-        this.size = tilesNb;
-        create(tilesNb, this.goal);
+    void setTaille(int taille) {
+        this.size = taille;
+        nouveau(taille, this.objectif);
     }
 
-    void setGoal(int goalNb) {
-        this.goal = goalNb;
-        create(this.size, goalNb);
+    void setObjectif(int objectif) {
+        this.objectif = objectif;
+        nouveau(this.size, objectif);
     }
 
-    void setTiles(int[][] tiles) { // used for testing
-        for (int i = 0; i<tiles.length; i++) {
-            for (int j = 0; j<tiles.length; j++) {
-                this.tiles[i][j] = tiles[i][j];
+    void setCases(int[][] cases) { // used for testing
+        for (int i = 0; i< cases.length; i++) {
+            for (int j = 0; j< cases.length; j++) {
+                this.cases[i][j] = cases[i][j];
             }
         }
     }

@@ -1,7 +1,6 @@
 package me.gap.pcd2048;
 
 import javafx.application.Application;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -15,7 +14,7 @@ public class Main extends Application {
         BorderPane root = new BorderPane();
         Scene scene = new Scene(root, 900, 900);
 
-        Game game = new Game(4, scene);
+        Jeu jeu = new Jeu(4, scene);
 
 
         VBox leftRegion = new VBox();
@@ -31,16 +30,16 @@ public class Main extends Application {
         rightRegion.setMinWidth(100);
         rightRegion.setMaxWidth(100);
 
-        VuePlateau vp = new VuePlateau(game);
-        VueMenu vm = new VueMenu(game);
-        VueStats vs = new VueStats(game);
+        VuePlateau vp = new VuePlateau(jeu);
+        VueMenu vm = new VueMenu(jeu);
+        VueStats vs = new VueStats(jeu);
 
         root.setTop(vm);
         root.setCenter(vp);
         root.setBottom(vs);
         root.setStyle("-fx-background-color: #040E2F;");
 
-        scene.setOnKeyPressed(new PlayListener(game));
+        scene.setOnKeyPressed(new EcouteurJouer(jeu));
         primaryStage.setScene(scene);
         primaryStage.show();
     }

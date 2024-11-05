@@ -2,19 +2,15 @@ package me.gap.pcd2048;
 
 
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
 import java.util.Optional;
-import javafx.stage.Popup;
-import javafx.stage.Stage;
 
-public class SizeListener implements EventHandler<ActionEvent> {
-    private Game game;
+public class EcouteurTaille implements EventHandler<ActionEvent> {
+    private Jeu jeu;
 
-    public SizeListener(Game game) {
-        this.game = game;
+    public EcouteurTaille(Jeu jeu) {
+        this.jeu = jeu;
     }
 
     @Override
@@ -30,13 +26,13 @@ public class SizeListener implements EventHandler<ActionEvent> {
             int int_result = Integer.parseInt(result.get());
 
             if (int_result < 2) {
-                game.setSize(3);
+                jeu.setTaille(3);
             }
             else if (int_result > 16) {
-                game.setSize(16);
+                jeu.setTaille(16);
             }
             else {
-                game.setSize(int_result);
+                jeu.setTaille(int_result);
             }
         }
     }

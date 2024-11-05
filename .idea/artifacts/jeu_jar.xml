@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="tp1_pcd:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/tp1_pcd_jar</output-path>
+  <artifact type="jar" name="jeu:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/jeu_jar</output-path>
     <root id="archive" name="tp1_pcd.jar">
       <element id="module-output" name="tp1_pcd.main" />
     </root>

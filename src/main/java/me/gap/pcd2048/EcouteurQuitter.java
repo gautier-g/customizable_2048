@@ -5,8 +5,8 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
-public class ExitListener implements EventHandler<ActionEvent> {
-    public ExitListener() {
+public class EcouteurQuitter implements EventHandler<ActionEvent> {
+    public EcouteurQuitter() {
         super();
     }
 

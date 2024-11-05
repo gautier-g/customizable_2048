@@ -6,11 +6,11 @@ import javafx.scene.control.TextInputDialog;
 
 import java.util.Optional;
 
-public class GoalListener implements EventHandler<ActionEvent> {
-    private Game game;
+public class EcouteurObjectif implements EventHandler<ActionEvent> {
+    private Jeu jeu;
 
-    public GoalListener(Game game) {
-        this.game = game;
+    public EcouteurObjectif(Jeu jeu) {
+        this.jeu = jeu;
     }
 
     @Override
@@ -26,13 +26,13 @@ public class GoalListener implements EventHandler<ActionEvent> {
             int int_result = Integer.parseInt(result.get());
 
             if (int_result < 50) {
-                game.setGoal(50);
+                jeu.setObjectif(50);
             }
             else if (int_result > 8192) {
-                game.setGoal(8192);
+                jeu.setObjectif(8192);
             }
             else {
-                game.setGoal(int_result);
+                jeu.setObjectif(int_result);
             }
         }
     }

@@ -2,7 +2,6 @@ package me.gap.pcd2048;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -10,12 +9,12 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 
-public class VueStats extends HBox implements Observer {
+public class VueStats extends HBox implements Observateur {
     private HBox hboxQueJutiliseAfinDePouvoirCentrerLeLabelEnBasDeLEcran = new HBox();
     private Label label = new Label();
-    private Game game;
+    private Jeu jeu;
 
-    public VueStats(Game game) {
+    public VueStats(Jeu jeu) {
         super();
         BorderPane.setMargin(this, new Insets(20, 0, 0, 0));
         this.label.setFont(Font.font("sans-serif", FontWeight.BOLD, 20));
@@ -30,12 +29,12 @@ public class VueStats extends HBox implements Observer {
         this.hboxQueJutiliseAfinDePouvoirCentrerLeLabelEnBasDeLEcran.setAlignment(Pos.CENTER);
         this.hboxQueJutiliseAfinDePouvoirCentrerLeLabelEnBasDeLEcran.getChildren().add(this.label);
         this.getChildren().add(hboxQueJutiliseAfinDePouvoirCentrerLeLabelEnBasDeLEcran);
-        this.game = game;
-        this.game.addObserver(this);
-        react();
+        this.jeu = jeu;
+        this.jeu.ajouterObservateur(this);
+        reagir();
     }
 
-    public void react() {
-        this.label.setText("Games won/played: " + this.game.getWinsNumber() + " / " + this.game.getPartiesNumber());
+    public void reagir() {
+        this.label.setText("Games won/played: " + this.jeu.getNbGagnees() + " / " + this.jeu.getNbJouees());
     }
 }
